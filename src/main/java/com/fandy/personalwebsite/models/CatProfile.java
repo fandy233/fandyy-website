@@ -11,6 +11,9 @@ public class CatProfile {
     private String name;
     private String description;
     private String imageUrl;
+    private String breed;
+    private String gender;
+    private String ownerId;
 
     public String getId() {
         return id;
@@ -43,23 +46,29 @@ public class CatProfile {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-}
 
-/*
-public class CatProfile {
-    private String name;
-    private String description;
-    private String imageUrl;
-
-    // Constructor, getters, and setters
-    public CatProfile(String name, String description, String imageUrl) {
-        this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
+    public String getBreed() {
+        return breed;
     }
 
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public String getImageUrl() { return imageUrl; }
+    public String getGender() {
+        return gender;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
 }
-*/
+

@@ -1,6 +1,7 @@
 package com.fandy.personalwebsite.services;
 
 import com.fandy.personalwebsite.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,9 @@ public class UserDetailsImpl implements UserDetails {
     private GrantedAuthority authority;
 
     public UserDetailsImpl(String id, String username, String password, String role) {
+        if (role == null || role.isEmpty()) {
+            throw new IllegalArgumentException("A granted authority textual representation is required");
+        }
         this.id = id;
         this.username = username;
         this.password = password;
@@ -34,7 +38,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Return a singleton list containing the role of the user
         return Collections.singletonList(authority);
     }
 
