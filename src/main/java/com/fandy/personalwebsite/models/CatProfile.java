@@ -14,6 +14,10 @@ public class CatProfile {
     private String breed;
     private String gender;
     private String ownerId;
+    private String momId;
+    private String dadId;
+    private String momName;
+    private String dadName;
 
     public String getId() {
         return id;
@@ -69,6 +73,38 @@ public class CatProfile {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getMomId() {
+        return momId;
+    }
+
+    public void setMomId(String momId) {
+        this.momId = momId;
+    }
+
+    public String getDadId() {
+        return dadId;
+    }
+
+    public void setDadId(String dadId) {
+        this.dadId = dadId;
+    }
+
+    public String getMomName() {
+        return momName;
+    }
+
+    public void setMomName(String momName) {
+        this.momName = momName;
+    }
+
+    public String getDadName() {
+        return dadName;
+    }
+
+    public void setDadName(String dadName) {
+        this.dadName = dadName;
     }
 }
 

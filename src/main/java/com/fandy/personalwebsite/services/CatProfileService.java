@@ -17,8 +17,14 @@ public class CatProfileService {
         return catProfileRepository.save(catProfile);
     }
 
+    //fetch all cat info by owner id
     public List<CatProfile> findCatsByUserId(String id) {
         return catProfileRepository.findCatsByOwnerId(id);
+    }
+
+    //fetch specific cat info by cat id
+    public CatProfile findCatById(String id) {
+        return catProfileRepository.findCatById(id);
     }
 
     public CatProfile saveCatProfile(String userId, CatRequest catRequest) {
@@ -29,6 +35,10 @@ public class CatProfileService {
         cat.setGender(catRequest.getGender());
         cat.setDescription(catRequest.getDescription());
         cat.setOwnerId(userId);
+        cat.setDadId(catRequest.getDadId());
+        cat.setMomId(catRequest.getMomId());
+        cat.setDadName(catRequest.getDadName());
+        cat.setMomName(catRequest.getMomName());
 
         return catProfileRepository.save(cat);
     }
