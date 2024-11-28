@@ -1,6 +1,6 @@
 package com.fandy.personalwebsite.controllers;
 
-import com.fandy.personalwebsite.models.CatRequest;
+import com.fandy.personalwebsite.controllers.requests.CatRequest;
 import com.fandy.personalwebsite.services.CatProfileService;
 import com.fandy.personalwebsite.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +38,30 @@ public class DashboardController {
             return ResponseEntity.status(HttpStatus.CREATED).body(newCat);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add cat");
+        }
+    }
+
+    @PutMapping("/cats/{id}")
+    public ResponseEntity<?> updateUserCat(@PathVariable String id, @RequestBody CatRequest catRequest) {
+        try {
+            CatProfile existingCat = catProfileService.findCatById(id);
+            if(existingCat == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            existingCat.setName(catRequest.getName());
+            existingCat.setDescription(catRequest.getDescription());
+            existingCat.setGender(catRequest.getGender());
+            existingCat.setBreed(catRequest.getBreed());
+            existingCat.setImageUrl(catRequest.getImageUrl());
+            existingCat.setDadName(catRequest.getDadName());
+            existingCat.setMomName(catRequest.getMomName());
+            existingCat.setMomId(catRequest.getMomId());
+            existingCat.setDadId(catRequest.getDadId());
+            catProfileService.saveCatProfile(existingCat);
+
+            return ResponseEntity.status(HttpStatus.OK).body(existingCat);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update cat");
         }
     }
 }

@@ -2,7 +2,7 @@ package com.fandy.personalwebsite.services;
 
 import com.fandy.personalwebsite.models.CatProfile;
 import com.fandy.personalwebsite.models.CatProfileRepository;
-import com.fandy.personalwebsite.models.CatRequest;
+import com.fandy.personalwebsite.controllers.requests.CatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

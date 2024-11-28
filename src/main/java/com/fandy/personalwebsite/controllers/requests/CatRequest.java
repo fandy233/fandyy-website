@@ -1,4 +1,4 @@
-package com.fandy.personalwebsite.models;
+package com.fandy.personalwebsite.controllers.requests;
 
 public class CatRequest {
     private String name;
