@@ -13,6 +13,8 @@ public class CatProfileService {
     @Autowired
     private CatProfileRepository catProfileRepository;
 
+    private final static String DEFAULT_IMAGE_URL = "https://s2.loli.net/2024/11/28/2TUzgLenuPdsKqI.png";
+
     public CatProfile saveCatProfile(CatProfile catProfile) {
         return catProfileRepository.save(catProfile);
     }
@@ -30,7 +32,9 @@ public class CatProfileService {
     public CatProfile saveCatProfile(String userId, CatRequest catRequest) {
         CatProfile cat = new CatProfile();
         cat.setName(catRequest.getName());
-        cat.setImageUrl(catRequest.getImageUrl());
+        cat.setImageUrl(catRequest.getImageUrl() == null || catRequest.getImageUrl().isEmpty()
+                ? DEFAULT_IMAGE_URL
+                : catRequest.getImageUrl());
         cat.setBreed(catRequest.getBreed());
         cat.setGender(catRequest.getGender());
         cat.setDescription(catRequest.getDescription());
