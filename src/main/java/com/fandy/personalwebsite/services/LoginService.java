@@ -32,16 +32,14 @@ public class LoginService {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
 
-        return jwt;
+        return jwtUtils.generateJwtToken(authentication.getName());
     }
 
     public boolean registerUser(String username, String password, String role) {
         if (userRepository.findByUsername(username).isPresent()) {
             return false; // User already exists
         }
-
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(password));

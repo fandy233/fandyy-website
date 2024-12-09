@@ -35,7 +35,10 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
                 return;
             }
             logger.debug("validating token for request URI: " + request.getRequestURI());
+            logger.debug("request: " + request.getHeader("Authorization"));
+
             String jwt = parseJwt(request);
+
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
                 logger.debug("Successfully validated token for user: " + username);
