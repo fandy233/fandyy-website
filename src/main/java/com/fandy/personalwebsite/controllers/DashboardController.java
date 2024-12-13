@@ -48,15 +48,7 @@ public class DashboardController {
             if(existingCat == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            existingCat.setName(catRequest.getName());
-            existingCat.setDescription(catRequest.getDescription());
-            existingCat.setGender(catRequest.getGender());
-            existingCat.setBreed(catRequest.getBreed());
-            existingCat.setImageUrl(catRequest.getImageUrl());
-            existingCat.setDadName(catRequest.getDadName());
-            existingCat.setMomName(catRequest.getMomName());
-            existingCat.setMomId(catRequest.getMomId());
-            existingCat.setDadId(catRequest.getDadId());
+            catProfileService.updateCatProfile(existingCat, catRequest);
             catProfileService.saveCatProfile(existingCat);
 
             return ResponseEntity.status(HttpStatus.OK).body(existingCat);

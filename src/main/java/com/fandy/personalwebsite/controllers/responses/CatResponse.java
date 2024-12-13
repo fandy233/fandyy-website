@@ -1,15 +1,10 @@
-package com.fandy.personalwebsite.models;
+package com.fandy.personalwebsite.controllers.responses;
 
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.fandy.personalwebsite.models.CatProfile;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-@Document(collection = "cats")
-public class CatProfile {
-    @Id
+public class CatResponse {
     private String id;
     private String name;
     private String description;
@@ -25,11 +20,37 @@ public class CatProfile {
     private Integer vaccination;
     private LocalDate dateOfBirth;
     private Boolean microchip;
-    private String certificate; //None, CFA, TICA
+    private String certificate;
     private String price;
     private Boolean forSale;
+    private String age; // Calculated field
     private String grade;
     private String color;
+
+    public CatResponse(CatProfile cat) {
+        this.id = cat.getId();
+        this.name = cat.getName();
+        this.description = cat.getDescription();
+        this.imageUrl = cat.getImageUrl();
+        this.breed = cat.getBreed();
+        this.gender = cat.getGender();
+        this.ownerId = cat.getOwnerId();
+        this.momId = cat.getMomId();
+        this.dadId = cat.getDadId();
+        this.momName = cat.getMomName();
+        this.dadName = cat.getDadName();
+        this.neuteredOrSprayed = cat.getNeuteredOrSprayed();
+        this.vaccination = cat.getVaccination();
+        this.dateOfBirth = cat.getDateOfBirth();
+        this.microchip = cat.getMicrochip();
+        this.certificate = cat.getCertificate();
+        this.price = cat.getPrice();
+        this.forSale = cat.getForSale();
+        this.grade = cat.getGrade();
+        this.color = cat.getColor();
+    }
+
+    // Getters and setters...
 
     public String getId() {
         return id;
@@ -47,14 +68,6 @@ public class CatProfile {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -63,16 +76,24 @@ public class CatProfile {
         this.imageUrl = imageUrl;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getBreed() {
         return breed;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public void setGender(String gender) {
@@ -173,6 +194,14 @@ public class CatProfile {
 
     public void setForSale(Boolean forSale) {
         this.forSale = forSale;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getGrade() {
