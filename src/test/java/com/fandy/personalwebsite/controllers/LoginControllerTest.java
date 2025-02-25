@@ -69,8 +69,9 @@ public class LoginControllerTest {
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("newuser");
         registerRequest.setPassword("password123");
+        registerRequest.setEmail("testuser@gmail.com");
 
-        Mockito.when(loginService.registerUser(eq("newuser"), eq("password123"), eq("ROLE_USER"))).thenReturn(true);
+        Mockito.when(loginService.registerUser(eq("newuser"), eq("password123"), eq("testuser@gmail.com"), eq("ROLE_USER"))).thenReturn("success");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -84,14 +85,30 @@ public class LoginControllerTest {
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setUsername("existinguser");
         registerRequest.setPassword("password123");
+        registerRequest.setEmail("testuser@gmail.com");
 
-        Mockito.when(loginService.registerUser(eq("existinguser"), eq("password123"), eq("ROLE_USER"))).thenReturn(false);
+        Mockito.when(loginService.registerUser(eq("existinguser"), eq("password123"), eq("testuser@gmail.com"), eq("ROLE_USER"))).thenReturn("Username already exists");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Username already exists"));
+    }
+
+    @Test
+    public void testRegisterUser_EmailExists() throws Exception {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setUsername("existinguser");
+        registerRequest.setPassword("password123");
+        registerRequest.setEmail("testuser@gmail.com");
+        Mockito.when(loginService.registerUser(eq("existinguser"), eq("password123"), eq("testuser@gmail.com"), eq("ROLE_USER"))).thenReturn("Email not in the whitelist");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Email not in the whitelist"));
     }
 }
 

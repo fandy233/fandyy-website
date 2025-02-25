@@ -62,11 +62,11 @@ public class LoginController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
-        boolean success = loginService.registerUser(registerRequest.getUsername(), registerRequest.getPassword(), "ROLE_USER");
-        if (success) {
+        String response = loginService.registerUser(registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getEmail(),"ROLE_USER");
+        if (response.equals("success")) {
             return ResponseEntity.ok("User registered successfully");
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 

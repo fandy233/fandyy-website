@@ -1,5 +1,6 @@
 package com.fandy.personalwebsite.services;
 
+import com.fandy.personalwebsite.models.EmailWhitelistRepository;
 import com.fandy.personalwebsite.models.User;
 import com.fandy.personalwebsite.models.UserRepository;
 import com.fandy.personalwebsite.services.jwt.JwtUtils;
@@ -21,6 +22,9 @@ public class LoginService {
     private UserRepository userRepository;
 
     @Autowired
+    EmailWhitelistRepository emailWhitelistRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -36,16 +40,20 @@ public class LoginService {
         return jwtUtils.generateJwtToken(authentication.getName());
     }
 
-    public boolean registerUser(String username, String password, String role) {
-        if (userRepository.findByUsername(username).isPresent()) {
-            return false; // User already exists
+    public String registerUser(String username, String password, String email, String role) {
+        if (userRepository.findByUsername(username).isPresent() || userRepository.findByEmail(email).isPresent()) {
+            return "Username or email already in use.";
+        }
+        if (emailWhitelistRepository.findByEmail(email).isEmpty()) {
+            return "Email address is not in the whitelist, please contact administrator."; // User not in the white list
         }
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setRole(role);
+        newUser.setEmail(email);
         userRepository.save(newUser);
 
-        return true;
+        return "success";
     }
 }
