@@ -51,6 +51,7 @@ public class CatProfileService {
         cat.setMicrochip(catRequest.getMicrochip());
         cat.setNeuteredOrSprayed(catRequest.getNeuteredOrSprayed());
         cat.setVaccination(catRequest.getVaccination());
+        cat.setContact(catRequest.getContact());
     }
 
     //fetch all cat info by owner id

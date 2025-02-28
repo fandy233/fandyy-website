@@ -21,6 +21,7 @@ public class CatRequest {
     private Boolean forSale;
     private String grade;
     private String color;
+    private String contact;
 
     public String getName() {
         return name;
@@ -164,6 +165,14 @@ public class CatRequest {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
 

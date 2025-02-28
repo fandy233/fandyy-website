@@ -30,6 +30,7 @@ public class CatProfile {
     private Boolean forSale;
     private String grade;
     private String color;
+    private String contact;
 
     public String getId() {
         return id;
@@ -189,6 +190,14 @@ public class CatProfile {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
 

@@ -26,6 +26,7 @@ public class CatResponse {
     private String age; // Calculated field
     private String grade;
     private String color;
+    private String contact;
 
     public CatResponse(CatProfile cat) {
         this.id = cat.getId();
@@ -48,6 +49,7 @@ public class CatResponse {
         this.forSale = cat.getForSale();
         this.grade = cat.getGrade();
         this.color = cat.getColor();
+        this.contact = cat.getContact();
     }
 
     // Getters and setters...
@@ -218,6 +220,14 @@ public class CatResponse {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
 
