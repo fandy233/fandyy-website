@@ -19,7 +19,7 @@ public class UploadController {
     @PostMapping("/upload")
     public ResponseEntity<?> uploadImage(@RequestParam("smfile") MultipartFile file) {
         String apiUrl = "https://sm.ms/api/v2/upload";
-        String apiToken = "b1DvDDNkklvFHZGR1UMRlWMF7svjmSHP";
+        String apiToken = "this is a token";
 
         try {
             File tempFile = File.createTempFile("upload-", file.getOriginalFilename());
