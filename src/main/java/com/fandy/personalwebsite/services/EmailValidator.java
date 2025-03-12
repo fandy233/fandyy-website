@@ -11,7 +11,6 @@ public class EmailValidator {
 
     @Autowired
     private EmailWhitelistRepository emailWhitelistRepository;
-
     public boolean validateEmail(String email) {
         return emailWhitelistRepository.findByEmail(email).isPresent();
     }
